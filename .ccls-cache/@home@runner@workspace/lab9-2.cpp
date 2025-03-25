@@ -44,3 +44,15 @@ int main()
         << dealer payment << endl;
     return 0;
 }//end of main function    
+
+//function definitions 
+double getPayment(int prin, 
+                  double monthRate,
+                  int months)
+{
+    //calc and returns a monthly payment
+    double monthPay = 0.0;
+    monthPay = prin * monthRate /
+        (1 - pow(monthRate + 1, -months));
+    return monthPay;
+}    // end of getPayment function
