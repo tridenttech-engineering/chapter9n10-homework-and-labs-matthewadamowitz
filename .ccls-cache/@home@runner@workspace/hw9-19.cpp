@@ -1,4 +1,3 @@
-
 //Lab 9-2.cpp - displays two monthly car payments
 //Created/revised by <Matthew Adamowitz> on <3/24/25>
 
@@ -12,7 +11,6 @@ double getPayment(int, double, int);
 
 int main()
 {
-    //declare variables
     int carPrice = 0;
     int rebate = 0;
     double creditRate = 0.0;
@@ -31,47 +29,30 @@ int main()
     cin >> dealerRate;
     cout << "Term in years: ";
     cin >> term;
-
+    
     //call function to calculate payments
-    creditPayment = getPayment(carPrice - rebate, creditRate / 12, term * 12);
-    dealerPayment = getPayment(carPrice, dealerRate / 12, term * 12);    //assign values to calculate payments
+    creditPayment = getPayment(carPrice - rebate,
+        creditRate / 12, term * 12);
+    dealerPayment = getPayment(carPrice,
+        dealerRate / 12, term * 12);
     
     //display payments
-    cout << fixed << setprecision(2) << endl; 
-
-    if (creditPayment == -1 || dealerPayment == -1)
-    {
-        cout << "Error: Division by zero encountered in payment calculation.\n";
-    }
-    else
-    {
-        cout << "Credit union monthly payment: $" << creditPayment << endl;
-        cout << "Dealer monthly payment: $" << dealerPayment << endl;
-
-        //calculate and display total payments
-        double totalCredit = creditPayment * (term *12); 
-        double totalDealer = dealerPayment * (term * 12);
-
-        cout << "Total paid through credit union: $" << totalCredit << endl;
-        cout << "Total paid through dealer: $" << totalDealer << endl;
-    }
+    cout << fixed << setprecision(2) << endl;
+    cout << "Credit union payment: $"
+        << creditPayment << endl;
+    cout << "Dealer payment: $"
+        << dealerPayment << endl;
     return 0;
-
-}//end of main function
-
-//function to calculate monthly payments
-double getPayment(int prin, double monthRate, int months)
-{
-    if(monthRate == 0)
-    {
-        return static_cast<double>(prin) / months; 
-    }
-
-    double denominator = pow(1 +monthRate, months) -1; 
-    if (denominator == 0)
-    {
-        return -1;
-    }
-
-    return (prin * monthRate * pow(1 + monthRate, months)) / denominator;
 }
+
+//function definitions
+double getPayment(int prin,
+                  double monthRate,
+                  int months)    
+{    
+    //calc and returns a monthly payment
+    double monthPay = 0.0;
+    monthPay = prin * monthRate /
+        (1 - pow(monthRate + 1, -months));
+    return monthPay;
+} //end of getPayment function
