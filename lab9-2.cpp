@@ -41,7 +41,7 @@ int main()
     cout << "Credit union payment: $"
         << creditPayment << endl;   
     cout << "Dealer payment: $"
-        << dealer payment << endl;
+        << dealerPayment << endl;
     return 0;
 }//end of main function    
 

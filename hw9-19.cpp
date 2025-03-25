@@ -46,3 +46,20 @@ int main()
     
     return 0;
 
+}//end of main function
+
+double getPayment (int loanAmount, double monthRate, int months
+{
+    if(monthlyRate == 0)
+    {
+        return -1; 
+    }
+
+    double denominator = pow(1 + monthRate, months) -1; 
+    if (denominator == 0)
+    {
+        return -1;
+    }
+
+    return (loanAmount * monthlyRate * pow(1 + monthRate, months)) / denominator;
+}
