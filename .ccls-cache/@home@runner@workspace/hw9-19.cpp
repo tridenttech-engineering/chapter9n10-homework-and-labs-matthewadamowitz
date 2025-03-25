@@ -23,36 +23,45 @@ int main()
     cin >> carPrice;
     cout << "Rebate: ";
     cin >> rebate;
-    cout << "Credit union rate: ";
+    cout << "Credit union rate (as a decimal): ";
     cin >> creditRate;
-    cout << "Dealer rate: ";
+    cout << "Dealer rate (as a decimal): ";
     cin >> dealerRate;
     cout << "Term in years: ";
     cin >> term;
+
+    int months = term * 12; 
     
     //call function to calculate payments
     creditPayment = getPayment(carPrice - rebate,
         creditRate / 12, term * 12);
     dealerPayment = getPayment(carPrice,
         dealerRate / 12, term * 12);
+
+    //round payments to 2 decimal places
+    creditPayment = round(creditPayment * 100) / 100;
+    dealerPayment = round(dealerPayment * 100) / 100;
     
     //display payments
     cout << fixed << setprecision(2) << endl;
-    cout << "Credit union payment: $"
-        << creditPayment << endl;
-    cout << "Dealer payment: $"
-        << dealerPayment << endl;
+    cout << "Credit union payment: $" << creditPayment << endl;
+    cout << "Total credit union payment: $" << (creditPayment * months) << endl;
+    cout << "Dealer payment: $" << dealerPayment << endl;
+    cout << "Total dealer payment: $" << (dealerPayment * months) << endl;
+    
     return 0;
+    
 }
 
 //function definitions
-double getPayment(int prin,
-                  double monthRate,
-                  int months)    
+double getPayment(int prin, double monthRate, int months)    
 {    
-    //calc and returns a monthly payment
-    double monthPay = 0.0;
-    monthPay = prin * monthRate /
-        (1 - pow(monthRate + 1, -months));
-    return monthPay;
-} //end of getPayment function
+    if (monthRate == 0) //prevetn division by zero 
+        return -1; 
+
+    double denominator = (1 - pow(1 + monthRate, -months));
+    if (denominator == 0)
+        return -1; 
+
+    return prin * monthRate / denominator;
+}
