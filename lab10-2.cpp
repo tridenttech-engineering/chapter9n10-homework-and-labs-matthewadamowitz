@@ -6,7 +6,7 @@
 using namespace std;
 
 //function prototypes
-void displayOption(); 
+void displayOptions(); 
 void getRegular(int winows, double price, double& total);
 void getBoGo(int windows, double price, double& total);
 
@@ -19,7 +19,7 @@ int main()
 
     cout << fixed << setprecision(2);
 
-    displayOption();
+    displayOptions();
     cout << "Enter option? ";
     cin >> option;
 
@@ -60,5 +60,5 @@ void getRegular(int windows, double price, double &total)
 
 void getBoGo(int windows, double price, double &total)
 {
-    total = (windows / 2 + windows % 2) * price;
+    total = ((windows + 1) / 2) * price;
 }    //end getBoGo function
