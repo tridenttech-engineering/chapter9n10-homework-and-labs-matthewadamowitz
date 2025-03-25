@@ -53,8 +53,13 @@ double getPayment(int prin, double monthRate, int months)
 {
     if(monthRate == 0)
     {
-        return -1; 
+        return static_cast<double>(prin) / months;    
     }
 
+    double denominator = pow(1 + monthRate, -months) - 1; 
+    if (denominator == 0)
+    {
+        return -1; 
+    }
     return prin * monthRate * pow(1 + monthRate, months) / (pow(1 + monthRate, months) - 1);
 }

@@ -1,3 +1,4 @@
+
 //Lab 9-2.cpp - displays two monthly car payments
 //Created/revised by <Matthew Adamowitz> on <3/24/25>
 
@@ -48,18 +49,17 @@ int main()
 
 }//end of main function
 
-double getPayment (int loanAmount, double monthRate, int months
+double getPayment(int prin, double monthRate, int months)
 {
-    if(monthlyRate == 0)
+    if(monthRate == 0)
+    {
+        return static_cast<double>(prin) / months;    
+    }
+
+    double denominator = pow(1 + monthRate, -months) - 1; 
+    if (denominator == 0)
     {
         return -1; 
     }
-
-    double denominator = pow(1 + monthRate, months) -1; 
-    if (denominator == 0)
-    {
-        return -1;
-    }
-
-    return (loanAmount * monthlyRate * pow(1 + monthRate, months)) / denominator;
+    return prin * monthRate * pow(1 + monthRate, months) / (pow(1 + monthRate, months) - 1);
 }
